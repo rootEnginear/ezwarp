@@ -22,11 +22,17 @@ body {
   margin: 64px auto;
 }
 
-h1 {
-  letter-spacing: 2px;
-  font-weight: 200;
-  font-size: 1.5rem;
+h1,
+h2 {
+  letter-spacing: 2rem;
+  font-weight: 600;
+  font-size: 4rem;
   color: #fff;
+}
+
+h2 {
+  font-weight: 300;
+  font-size: 3rem;
 }
 
 .field {
@@ -44,7 +50,7 @@ h1 {
   border: 3px #aaa solid;
   border-top: 0;
   border-right: 0;
-  border-left: 7px #fff solid;
+  border-left: 6px #fff solid;
 }
 
 .field ::-webkit-input-placeholder {
@@ -78,11 +84,11 @@ h1 {
 .field::before, .field::after {
   z-index: -1;
   width: 105%;
-  -webkit-transform: rotate(1deg) skewX(10deg);
-          transform: rotate(1deg) skewX(10deg);
+  -webkit-transform: skewX(10deg);
+          transform: skewX(10deg);
   top: -15px;
   position: absolute;
-  left: -22px;
+  left: -25px;
   height: 120%;
   content: "";
   border: 5px #f04393 solid;
@@ -92,7 +98,7 @@ h1 {
 
 .field::after {
   top: 6px;
-  left: -10px;
+  left: -8px;
   border: #f9c449 5px solid;
   border-top: 0;
   border-left: 0;
@@ -106,5 +112,98 @@ h1 {
   color: #fff;
   border: 0;
   background: #000a;
+}
+
+ul.warplist {
+  text-align: left;
+  padding: 1.5rem 2rem;
+  margin: 1rem;
+  list-style: none;
+  -ms-flex-negative: 1;
+      flex-shrink: 1;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -ms-flex-preferred-size: 0;
+      flex-basis: 0;
+  display: inline-block;
+  color: #fff;
+  -webkit-box-shadow: 0 4px 8px #0001;
+          box-shadow: 0 4px 8px #0001;
+  border: 1px #fff solid;
+  border-radius: 4px;
+  background: #000a;
+}
+
+ul.warplist > strong {
+  display: block;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+ul.warplist > li {
+  padding: 0.2rem 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+ul.warplist > li a.warp {
+  color: white;
+  font-weight: 200;
+  text-decoration: none;
+  display: block;
+  -ms-flex-preferred-size: 0;
+      flex-basis: 0;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -ms-flex-negative: 1;
+      flex-shrink: 1;
+}
+
+ul.warplist > li a.delete {
+  margin-left: 0.5rem;
+  display: block;
+  text-decoration: none;
+}
+
+button.destroy {
+  font-weight: 200;
+  position: relative;
+  padding: 1rem;
+  outline: none;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  color: #eee;
+  border: 2px #aaa solid;
+  border-top: 0;
+  border-right: 0;
+  border-left: 5px #fff solid;
+  background: #000a;
+}
+
+button.destroy::before, button.destroy::after {
+  -webkit-transform: skewX(10deg);
+          transform: skewX(10deg);
+  content: "";
+  width: 105%;
+  height: 120%;
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  border: #f9c449 3px solid;
+  border-top: 3px transparent solid;
+  border-left: 3px transparent solid;
+  z-index: -1;
+}
+
+button.destroy::after {
+  top: -9px;
+  left: -17px;
+  border: #f04393 3px solid;
+  border-bottom: 3px transparent solid;
+  border-right: 3px transparent solid;
+  z-index: -1;
 }
 /*# sourceMappingURL=global.css.map */
