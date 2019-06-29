@@ -1,9 +1,10 @@
 <script>
   import { onMount } from "svelte";
+  import Warplist from "./components/Warplist.svelte";
 
-  let searchcontent = "";
-  $: formattedSearchcontent = formatUrl(searchcontent);
-  let data = { 1312321: ["aaaa", "asadasd"] };
+  let search = "";
+  $: formatted = formatUrl(search);
+  let data = {};
   const STORAGE_NAME = "ezwarp";
 
   function formatUrl(content) {
@@ -62,13 +63,12 @@
   }
 
   function gotoSite() {
-    if (searchcontent.trim() === "") return;
+    if (search.trim() === "") return;
     let anchor = document.createElement("a");
-    if (formattedSearchcontent[0] === "!") {
-      anchor.href =
-        "https://www5.javmost.com/" + formattedSearchcontent.slice(1);
+    if (formatted[0] === "!") {
+      anchor.href = "https://www5.javmost.com/" + formatted.slice(1);
     } else {
-      anchor.href = formattedSearchcontent;
+      anchor.href = formatted;
     }
     saveData(anchor.href);
     anchor.target = "_blank";
@@ -88,6 +88,16 @@
     localStorage.setItem(STORAGE_NAME, JSON.stringify(data));
   }
 
+  function deleteData(payload) {
+    console.log(payload.detail);
+    data[payload.detail.day].splice(payload.detail.index, 1);
+    if (!data[payload.detail.day].length) {
+      delete data[payload.detail.day];
+    }
+    data = data;
+    localStorage.setItem(STORAGE_NAME, JSON.stringify(data));
+  }
+
   function dropData() {
     localStorage.setItem(STORAGE_NAME, "{}");
     loadData();
@@ -98,26 +108,22 @@
   <div style="text-align:center">
     <h1>EZWARP</h1>
     <div class="field" tabindex="0">
-      <input
-        class="control"
-        placeholder="แปะลิงก์เบาๆ~"
-        bind:value={searchcontent} />
+      <input class="control" placeholder="แปะลิงก์เบาๆ~" bind:value={search} />
       <button class="control" on:click={gotoSite}>🔍</button>
     </div>
-    <div>
-      {#each Object.keys(data) as day}
-        <ul>
-          <strong>{new Date(+day).toLocaleDateString()}</strong>
-          {#each data[day] as url}
-            <li>
-              <a href={url}>{url}</a>
-            </li>
-          {/each}
-        </ul>
-        <button class="destroy" on:click={dropData}>🗑️ ล้างประวัติ</button>
-      {:else}
-        <h2 style="margin:7rem 0">— ไม่มีวาป! —</h2>
-      {/each}
+    <div style="margin-top:5rem">
+      <div style="display:flex;flex-wrap:wrap">
+        {#each Object.keys(data) as day}
+          <Warplist {day} urls={data[day]} on:delete={deleteData} />
+        {:else}
+          <h2 style="margin:7rem 0;flex-grow:1">— ไม่มีวาป! —</h2>
+        {/each}
+      </div>
+      {#if JSON.stringify(data) !== '{}'}
+        <div style="margin-top:5rem">
+          <button class="destroy" on:click={dropData}>🗑️ ล้างประวัติ</button>
+        </div>
+      {/if}
     </div>
 
   </div>
