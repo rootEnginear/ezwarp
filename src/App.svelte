@@ -55,7 +55,7 @@
       .replace(/เน็ท/g, "net");
 
     if (temp.match(/.-\d/) && !temp.match("/")) {
-      temp = "!" + temp;
+      temp = "!" + temp.toLocaleUpperCase();
     } else if (temp.slice(0, 4) !== "http") {
       temp = "https://" + temp;
     }
@@ -102,27 +102,37 @@
     localStorage.setItem(STORAGE_NAME, "{}");
     loadData();
   }
+
+  function handleKeypress(event) {
+    console.log(event);
+    if (event.key !== "Enter") return;
+    gotoSite();
+  }
 </script>
 
 <div class="container">
   <div style="text-align:center">
     <h1>EZWARP</h1>
     <div class="field" tabindex="0">
-      <input class="control" placeholder="แปะลิงก์เบาๆ~" bind:value={search} />
+      <input
+        class="control"
+        placeholder="แปะลิงก์เบาๆ~"
+        on:keypress={handleKeypress}
+        bind:value={search} />
       <button class="control" on:click={gotoSite}>🔍</button>
     </div>
     <div style="margin-top:5rem">
       <div style="display:flex;flex-wrap:wrap">
         {#each Object.keys(data) as day}
           <Warplist {day} urls={data[day]} on:delete={deleteData} />
-        {:else}
-          <h2 style="margin:7rem 0;flex-grow:1">— ไม่มีวาป! —</h2>
         {/each}
       </div>
       {#if JSON.stringify(data) !== '{}'}
         <div style="margin-top:5rem">
           <button class="destroy" on:click={dropData}>🗑️ ล้างประวัติ</button>
         </div>
+      {:else}
+        <h2 style="margin:7rem 0;flex-grow:1">— ไม่มีวาป! —</h2>
       {/if}
     </div>
 
