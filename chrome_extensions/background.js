@@ -69,7 +69,7 @@ function formatUrl(content) {
     .replace(/เน็ท/g, "net");
 
   if (temp.match(/.-\d/) && !temp.match("/")) {
-    temp = "!" + temp;
+    temp = "!" + temp.toLocaleUpperCase();
   } else if (temp.slice(0, 4) !== "http") {
     temp = "https://" + temp;
   }
