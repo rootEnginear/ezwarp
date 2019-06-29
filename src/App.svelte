@@ -62,6 +62,11 @@
     return temp;
   }
 
+  function handleKeypress(event) {
+    if (event.key !== "Enter") return;
+    return gotoSite();
+  }
+
   function gotoSite() {
     if (search.trim() === "") return;
     let anchor = document.createElement("a");
@@ -81,15 +86,16 @@
   }
 
   function saveData(url) {
-    let now = new Date().setHours(0, 0, 0, 0);
+    let now = +new Date().setHours(0, 0, 0, 0);
     let tempdata = data[now] || [];
     tempdata.push(url);
-    data[now] = tempdata;
+    let newData = {};
+    newData[now] = tempdata;
+    data = { ...newData, ...data };
     localStorage.setItem(STORAGE_NAME, JSON.stringify(data));
   }
 
   function deleteData(payload) {
-    console.log(payload.detail);
     data[payload.detail.day].splice(payload.detail.index, 1);
     if (!data[payload.detail.day].length) {
       delete data[payload.detail.day];
@@ -101,12 +107,6 @@
   function dropData() {
     localStorage.setItem(STORAGE_NAME, "{}");
     loadData();
-  }
-
-  function handleKeypress(event) {
-    console.log(event);
-    if (event.key !== "Enter") return;
-    gotoSite();
   }
 </script>
 
@@ -132,7 +132,7 @@
           <button class="destroy" on:click={dropData}>🗑️ ล้างประวัติ</button>
         </div>
       {:else}
-        <h2 style="margin:7rem 0;flex-grow:1">— ไม่มีวาป! —</h2>
+        <h2 style="margin:3rem 0;flex-grow:1">— ไม่มีวาป! —</h2>
       {/if}
     </div>
 
