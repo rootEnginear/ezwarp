@@ -1,23 +1,22 @@
 const contextMenuItem = {
-  "id": "ezwarp",
-  "title": "วาร์ปสิรออะไร",
-  "contexts": ["selection"]
-}
+  id: "ezwarp",
+  title: "วาร์ปสิรออะไร",
+  contexts: ["selection"]
+};
 
 chrome.contextMenus.create(contextMenuItem);
 
-chrome.contextMenus.onClicked.addListener(function(data){
-  if(data.menuItemId === "ezwarp" && data.selectionText){
+chrome.contextMenus.onClicked.addListener(function(data) {
+  if (data.menuItemId === "ezwarp" && data.selectionText) {
     gotoSite(data.selectionText);
   }
-})
+});
 
 function gotoSite(selectedWarp) {
   let formattedSearchcontent = formatUrl(selectedWarp);
   let anchor = document.createElement("a");
   if (formattedSearchcontent[0] === "!") {
-    anchor.href =
-      "https://www5.javmost.com/" + formattedSearchcontent.slice(1);
+    anchor.href = "https://www5.javmost.com/" + formattedSearchcontent.slice(1);
   } else {
     anchor.href = formattedSearchcontent;
   }
@@ -56,10 +55,7 @@ function formatUrl(content) {
     "วาย",
     "แซด"
   ].forEach((ch, i) => {
-    temp = temp.replace(
-      new RegExp(ch, "g"),
-      "abcdefghijklmnopqrrstuvwxyz"[i]
-    );
+    temp = temp.replace(new RegExp(ch, "g"), "abcdefghijklmnopqrrstuvwxyz"[i]);
   });
   temp = temp
     .trim()
@@ -72,7 +68,7 @@ function formatUrl(content) {
     .replace(/เน็ต/g, "net")
     .replace(/เน็ท/g, "net");
 
-  if (temp.match(/.-\d/)) {
+  if (temp.match(/.-\d/) && !temp.match("/")) {
     temp = "!" + temp;
   } else if (temp.slice(0, 4) !== "http") {
     temp = "https://" + temp;

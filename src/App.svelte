@@ -53,7 +53,7 @@
       .replace(/เน็ต/g, "net")
       .replace(/เน็ท/g, "net");
 
-    if (temp.match(/.-\d/)) {
+    if (temp.match(/.-\d/) && !temp.match("/")) {
       temp = "!" + temp;
     } else if (temp.slice(0, 4) !== "http") {
       temp = "https://" + temp;
