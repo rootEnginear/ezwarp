@@ -1,0 +1,13 @@
+{
+  "manifest_version": 2,
+  "name": "ezwarp",
+  "version":"1.0.0",
+  "description": "ezwarp ezlife",
+  "background":{
+      "scripts": ["background.js"],
+      "persistent": false
+  },
+  "permissions": [
+      "contextMenus"
+  ]
+}
