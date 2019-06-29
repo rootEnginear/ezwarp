@@ -62,3 +62,8 @@ typings/
 
 .DS_Store
 public/bundle.*
+public/global.*
+
+# Firebase
+.firebase
+firebase-debug.log
