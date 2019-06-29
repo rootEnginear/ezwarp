@@ -25,6 +25,7 @@
     "dev": "run-p start:dev autobuild",
     "start": "sirv public --single",
     "start:dev": "sirv public --single --dev",
-    "compile": "node-sass src/assets -o public | postcss public/*.css -u autoprefixer -u cssnano -r -m"
+    "compile": "node-sass src/assets -o public | postcss public/*.css -u autoprefixer -u cssnano -r -m",
+    "deploy": "yarn compile && yarn build && firebase deploy"
   }
 }
