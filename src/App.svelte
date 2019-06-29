@@ -112,14 +112,14 @@
 
 <div class="container">
   <div style="text-align:center">
-    <h1>EZWARP</h1>
-    <div class="field" tabindex="0">
+    <h1 style="margin-bottom:4rem">EZWARP</h1>
+    <div class="field">
       <input
-        class="control"
+        class="control expanded"
         placeholder="แปะลิงก์เบาๆ~"
         on:keypress={handleKeypress}
         bind:value={search} />
-      <button class="control" on:click={gotoSite}>🔍</button>
+      <button class="control search" on:click={gotoSite}>&nbsp;&nbsp;&nbsp;</button>
     </div>
     <div style="margin-top:5rem">
       <div style="display:flex;flex-wrap:wrap">
@@ -128,13 +128,16 @@
         {/each}
       </div>
       {#if JSON.stringify(data) !== '{}'}
-        <div style="margin-top:5rem">
+        <div style="margin-top:3rem">
           <button class="destroy" on:click={dropData}>🗑️ ล้างประวัติ</button>
         </div>
       {:else}
-        <h2 style="margin:3rem 0;flex-grow:1">— ไม่มีวาป! —</h2>
+        <h2 style="margin:3rem 0;flex-grow:1">
+          <span class="hidden-small">—</span>
+          ไม่มีวาป!
+          <span class="hidden-small">—</span>
+        </h2>
       {/if}
     </div>
-
   </div>
 </div>
