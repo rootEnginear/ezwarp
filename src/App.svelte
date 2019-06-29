@@ -62,6 +62,7 @@
   }
 
   function gotoSite() {
+    if (searchcontent.trim() === "") return;
     let anchor = document.createElement("a");
     if (formattedSearchcontent[0] === "!") {
       anchor.href =
@@ -103,7 +104,6 @@
         bind:value={searchcontent} />
       <button class="control" on:click={gotoSite}>🔍</button>
     </div>
-    <button on:click={dropData}>ล้างประวัติ</button>
     <div>
       {#each Object.keys(data) as day}
         <ul>
@@ -114,7 +114,11 @@
             </li>
           {/each}
         </ul>
+        <button class="destroy" on:click={dropData}>🗑️ ล้างประวัติ</button>
+      {:else}
+        <h2 style="margin:7rem 0">— ไม่มีวาป! —</h2>
       {/each}
     </div>
+
   </div>
 </div>

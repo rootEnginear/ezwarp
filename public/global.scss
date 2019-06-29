@@ -24,11 +24,16 @@ body {
   margin: 64px auto;
 }
 
-h1 {
-  letter-spacing: 2px;
+h1,
+h2 {
+  letter-spacing: 2rem;
   font-weight: 200;
-  font-size: 1.5rem;
+  font-size: 4rem;
   color: #fff;
+}
+
+h2 {
+  font-size: 3rem;
 }
 
 .field {
@@ -41,7 +46,7 @@ h1 {
   border: 3px #aaa solid;
   border-top: 0;
   border-right: 0;
-  border-left: 7px #fff solid;
+  border-left: 6px #fff solid;
 
   ::placeholder {
     opacity: 0.5;
@@ -54,10 +59,10 @@ h1 {
   &::after {
     z-index: -1;
     width: 105%;
-    transform: rotate(1deg) skewX(10deg);
+    transform: skewX(10deg);
     top: -15px;
     position: absolute;
-    left: -22px;
+    left: -25px;
     height: 120%;
     content: "";
     border: 5px #f04393 solid;
@@ -66,7 +71,7 @@ h1 {
   }
   &::after {
     top: 6px;
-    left: -10px;
+    left: -8px;
     border: #f9c449 5px solid;
     border-top: 0;
     border-left: 0;
@@ -79,5 +84,42 @@ h1 {
     color: #fff;
     border: 0;
     background: #000a;
+  }
+}
+
+button.destroy {
+  font-weight: 200;
+  position: relative;
+  padding: 1rem;
+  outline: none;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  color: #eee;
+  border: 2px #aaa solid;
+  border-top: 0;
+  border-right: 0;
+  border-left: 5px #fff solid;
+  background: #000a;
+  &::before,
+  &::after {
+    transform: skewX(10deg);
+    content: "";
+    width: 105%;
+    height: 120%;
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    border: #f9c449 3px solid;
+    border-top: 3px transparent solid;
+    border-left: 3px transparent solid;
+    z-index: -1;
+  }
+  &::after {
+    top: -9px;
+    left: -17px;
+    border: #f04393 3px solid;
+    border-bottom: 3px transparent solid;
+    border-right: 3px transparent solid;
+    z-index: -1;
   }
 }
