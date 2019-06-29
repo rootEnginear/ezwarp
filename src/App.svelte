@@ -77,7 +77,7 @@
 
   onMount(loadData);
   function loadData() {
-    data = JSON.parse(localStorage.getItem(STORAGE_NAME));
+    data = JSON.parse(localStorage.getItem(STORAGE_NAME) || "{}");
   }
 
   function saveData(url) {
