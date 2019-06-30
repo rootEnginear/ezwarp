@@ -158,12 +158,17 @@
           <button class="destroy" on:click={dropData}>🗑️ ล้างประวัติ</button>
         </div>
       {:else}
-        <h2 style="margin:3rem 0;flex-grow:1">
+        <h2 style="margin:3rem 0 5rem;flex-grow:1">
           <span class="hidden-small">—</span>
           ไม่มีวาป!
           <span class="hidden-small">—</span>
         </h2>
       {/if}
+      <footer>
+        Code with 🍆💦🍑 by rootEnginear
+        <br />
+        <div style="margin-top:1rem;font-size:.8em">Web For Fun #1</div>
+      </footer>
     </div>
   </div>
 </div>
