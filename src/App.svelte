@@ -99,12 +99,16 @@
   }
 
   onMount(() => {
-    loadData();
+    loadFromLocal();
     url = unobfuscateString(url);
   });
-  
-  function loadData() {
+
+  function loadFromLocal() {
     data = JSON.parse(localStorage.getItem(STORAGE_NAME) || "{}");
+  }
+
+  function saveToLocal(data) {
+    localStorage.setItem(STORAGE_NAME, data);
   }
 
   function saveData(url) {
@@ -114,7 +118,7 @@
     let newData = {};
     newData[now] = tempdata;
     data = { ...newData, ...data };
-    localStorage.setItem(STORAGE_NAME, JSON.stringify(data));
+    saveToLocal(JSON.stringify(data));
   }
 
   function deleteData(payload) {
@@ -123,12 +127,12 @@
       delete data[payload.detail.day];
     }
     data = data;
-    localStorage.setItem(STORAGE_NAME, JSON.stringify(data));
+    saveToLocal(JSON.stringify(data));
   }
 
   function dropData() {
-    localStorage.setItem(STORAGE_NAME, "{}");
-    loadData();
+    saveToLocal("{}");
+    loadFromLocal();
   }
 </script>
 
