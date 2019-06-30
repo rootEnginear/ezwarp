@@ -39,6 +39,20 @@ h2 {
   font-size: 3rem;
 }
 
+.time {
+  z-index: -1;
+  user-select: none;
+  font-size: 50vw;
+  font-weight: 200;
+  position: fixed;
+  left: 0;
+  color: white;
+  opacity: 0.1;
+  transform: translate(-5%, 0);
+  line-height: 50vw;
+  bottom: -8.3vw;
+}
+
 .field {
   position: relative;
   margin: 32px auto;

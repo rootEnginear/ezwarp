@@ -4,11 +4,13 @@
 
   let search = "";
   $: formatted = formatUrl(search);
-
   let data = {};
   const STORAGE_NAME = "ezwarp";
   let url =
     "1291421431401440880780791521531540890831441361581501531581600911451581570963";
+  let time = new Date();
+  $: hours = time.getHours();
+  $: minutes = time.getMinutes();
 
   function unobfuscateString(numStr) {
     let tNumStr = numStr;
@@ -101,6 +103,13 @@
   onMount(() => {
     loadFromLocal();
     url = unobfuscateString(url);
+    const interval = setInterval(() => {
+      time = new Date();
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
   });
 
   function loadFromLocal() {
@@ -137,6 +146,7 @@
 </script>
 
 <div class="container">
+  <div class="time">{hours}:{minutes}</div>
   <div style="text-align:center">
     <h1 style="margin-bottom:4rem">EZWARP</h1>
     <div class="field">
