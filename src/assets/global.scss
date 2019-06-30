@@ -201,7 +201,9 @@ ul.warplist {
         text-decoration-color: white;
       }
     }
-    a.delete {
+    span.delete {
+      cursor: pointer;
+      user-select: none;
       transition: transform 0.3s;
       text-decoration: none;
       margin-left: 0.5rem;
