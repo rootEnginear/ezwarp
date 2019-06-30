@@ -151,7 +151,7 @@
     <div class="field">
       <input
         class="control expanded"
-        placeholder="แปะลิงก์เบาๆ~"
+        placeholder="แปะวาปเบาๆ~"
         on:keypress={searchKeypressHandler}
         bind:value={search} />
       <button class="control search" on:click={gotoSite} />
