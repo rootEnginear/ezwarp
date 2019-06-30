@@ -24,8 +24,8 @@
   );
 
   let time = new Date();
-  $: hours = time.getHours();
-  $: minutes = time.getMinutes();
+  $: hours = (t => (t < 10 ? "0" + t : t))(time.getHours());
+  $: minutes = (t => (t < 10 ? "0" + t : t))(time.getMinutes());
 
   function formatUrl(content) {
     let temp = content;
@@ -174,7 +174,7 @@
         </h2>
       {/if}
       <footer>
-        Code with 🍆💦🍑 by rootEnginear
+        Code with 🍆🍑💦 by rootEnginear
         <br />
         <div style="margin-top:1rem;font-size:.8em">Web For Fun #1</div>
       </footer>

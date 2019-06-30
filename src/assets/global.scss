@@ -42,14 +42,14 @@ h2 {
 .time {
   z-index: -1;
   user-select: none;
-  font-size: 50vw;
-  font-weight: 200;
-  position: fixed;
-  left: 0;
-  color: white;
-  opacity: 0.1;
   transform: translate(-5%, 0);
+  position: fixed;
+  opacity: 0.1;
   line-height: 50vw;
+  left: -2vw;
+  font-weight: 200;
+  font-size: 50vw;
+  color: white;
   bottom: -8.3vw;
 }
 
@@ -268,11 +268,11 @@ button.destroy {
 }
 
 footer {
-  color: white;
+  margin-top: 3rem;
   letter-spacing: 5px;
   font-weight: 200;
-  margin-top: 3rem;
   font-size: 1.5rem;
+  color: white;
 }
 
 @media (max-width: 800px) {
