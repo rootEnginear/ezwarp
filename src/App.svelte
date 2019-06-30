@@ -4,8 +4,26 @@
 
   let search = "";
   $: formatted = formatUrl(search);
+
   let data = {};
   const STORAGE_NAME = "ezwarp";
+  let url =
+    "1291421431401440880780791521531540890831441361581501531581600911451581570963";
+
+  function unobfuscateString(numStr) {
+    let tNumStr = numStr;
+    let chunkSize = tNumStr[tNumStr.length - 1];
+    tNumStr = tNumStr.slice(0, -1);
+    let charArray = tNumStr
+      .match(new RegExp(".{1," + chunkSize + "}", "g"))
+      .map(str => +str);
+    let arrLen = charArray.length;
+    let string = "";
+    charArray.forEach((ch, i) => {
+      string += String.fromCharCode(ch - i - arrLen);
+    });
+    return string;
+  }
 
   function formatUrl(content) {
     let temp = content;
@@ -62,16 +80,11 @@
     return temp;
   }
 
-  function handleKeypress(event) {
-    if (event.key !== "Enter") return;
-    return gotoSite();
-  }
-
   function gotoSite() {
     if (search.trim() === "") return;
     let anchor = document.createElement("a");
     if (formatted[0] === "!") {
-      anchor.href = "https://www5.javmost.com/" + formatted.slice(1);
+      anchor.href = url + formatted.slice(1);
     } else {
       anchor.href = formatted;
     }
@@ -80,7 +93,16 @@
     anchor.click();
   }
 
-  onMount(loadData);
+  function searchKeypressHandler(event) {
+    if (event.key !== "Enter") return;
+    return gotoSite();
+  }
+
+  onMount(() => {
+    loadData();
+    url = unobfuscateString(url);
+  });
+  
   function loadData() {
     data = JSON.parse(localStorage.getItem(STORAGE_NAME) || "{}");
   }
@@ -117,9 +139,9 @@
       <input
         class="control expanded"
         placeholder="แปะลิงก์เบาๆ~"
-        on:keypress={handleKeypress}
+        on:keypress={searchKeypressHandler}
         bind:value={search} />
-      <button class="control search" on:click={gotoSite}>&nbsp;&nbsp;&nbsp;</button>
+      <button class="control search" on:click={gotoSite} />
     </div>
     <div style="margin-top:5rem">
       <div style="display:flex;flex-wrap:wrap">
