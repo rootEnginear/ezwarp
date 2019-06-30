@@ -13,6 +13,8 @@
     <li transition:fade>
       <a class="warp" href={url}>{url}</a>
       <span
+        aria-label="delete"
+        role="button"
         class="delete"
         on:click={() => dispatch('delete', { day: day, index: i })}>
         ❌

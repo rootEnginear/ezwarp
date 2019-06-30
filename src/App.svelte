@@ -150,11 +150,15 @@
     <h1 style="margin-bottom:4rem">EZWARP</h1>
     <div class="field">
       <input
+        aria-label="warp"
         class="control expanded"
         placeholder="แปะวาปเบาๆ~"
         on:keypress={searchKeypressHandler}
         bind:value={search} />
-      <button class="control search" on:click={gotoSite} />
+      <button
+        aria-label="go to entered warp"
+        class="control search"
+        on:click={gotoSite} />
     </div>
     <div style="margin-top:5rem">
       <div style="display:flex;flex-wrap:wrap">
@@ -164,7 +168,12 @@
       </div>
       {#if JSON.stringify(data) !== '{}'}
         <div style="margin-top:3rem">
-          <button class="destroy" on:click={dropData}>🗑️ ล้างประวัติ</button>
+          <button
+            aria-label="clear history"
+            class="destroy"
+            on:click={dropData}>
+            🗑️ ล้างประวัติ
+          </button>
         </div>
       {:else}
         <h2 style="margin:3rem 0 5rem;flex-grow:1">
