@@ -1,15 +1,18 @@
 $primary: #851e3e;
 $secondary: #061e3e;
 $accent: #f04393;
-
-* {
-  box-sizing: inherit;
-}
+$highlight: #f9c449;
 
 html {
   overflow-x: hidden;
   font-size: 10px;
   box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 
 body {
@@ -50,7 +53,7 @@ h2 {
   left: 0;
   font-weight: 200;
   font-size: 45vw;
-  color: white;
+  color: #fff;
   bottom: -8vw;
 }
 
@@ -59,7 +62,7 @@ h2 {
   margin: 32px auto;
   font-size: 2.4rem;
   display: flex;
-  box-shadow: 0 0 128px rgba(133, 30, 62, 0.5);
+  box-shadow: 0 0 128px #851e3e80;
   border: 3px #aaa solid;
   border-top: 0;
   border-right: 0;
@@ -84,14 +87,14 @@ h2 {
     left: -25px;
     height: 120%;
     content: "";
-    border: 5px #f04393 solid;
+    border: 5px $accent solid;
     border-right: 5px transparent solid;
     border-bottom: 5px transparent solid;
   }
   &::after {
     top: 6px;
     left: -2%;
-    border: #f9c449 5px solid;
+    border: 5px $highlight solid;
     border-top: 0;
     border-left: 0;
   }
@@ -143,7 +146,7 @@ h2 {
       }
       &::before {
         transform: translate(-70%, -70%);
-        border: 0.3rem solid #fff;
+        border: 0.3rem #fff solid;
         border-radius: 50%;
       }
       &::after {
@@ -197,9 +200,9 @@ ul.warplist {
       flex-grow: 1;
       flex-basis: 0;
       display: block;
-      color: white;
+      color: #fff;
       &:hover {
-        text-decoration-color: white;
+        text-decoration-color: #fff;
       }
     }
     span.delete {
@@ -243,7 +246,7 @@ button.destroy {
     left: -1px;
     height: 120%;
     content: "";
-    border: #f9c449 3px solid;
+    border: 3px $highlight solid;
     border-top: 3px transparent solid;
     border-left: 3px transparent solid;
   }
@@ -251,7 +254,7 @@ button.destroy {
     z-index: -1;
     top: -9px;
     left: -17px;
-    border: #f04393 3px solid;
+    border: 3px $accent solid;
     border-right: 3px transparent solid;
     border-bottom: 3px transparent solid;
   }
@@ -273,7 +276,7 @@ footer {
   letter-spacing: 5px;
   font-weight: 200;
   font-size: 1.5rem;
-  color: white;
+  color: #fff;
 }
 
 @media (max-width: 800px) {
