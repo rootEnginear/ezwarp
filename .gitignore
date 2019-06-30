@@ -67,3 +67,6 @@ public/global.*
 # Firebase
 .firebase
 firebase-debug.log
+
+# Chrome Extension Key
+*.pem
