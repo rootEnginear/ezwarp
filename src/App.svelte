@@ -6,13 +6,7 @@
   $: formatted = formatUrl(search);
   let data = {};
   const STORAGE_NAME = "ezwarp";
-  let url =
-    "1291421431401440880780791521531540890831441361581501531581600911451581570963";
-  let time = new Date();
-  $: hours = time.getHours();
-  $: minutes = time.getMinutes();
-
-  function unobfuscateString(numStr) {
+  let url = (function(numStr) {
     let tNumStr = numStr;
     let chunkSize = tNumStr[tNumStr.length - 1];
     tNumStr = tNumStr.slice(0, -1);
@@ -25,7 +19,13 @@
       string += String.fromCharCode(ch - i - arrLen);
     });
     return string;
-  }
+  })(
+    "1291421431401440880780791521531540890831441361581501531581600911451581570963"
+  );
+
+  let time = new Date();
+  $: hours = time.getHours();
+  $: minutes = time.getMinutes();
 
   function formatUrl(content) {
     let temp = content;
@@ -102,7 +102,6 @@
 
   onMount(() => {
     loadFromLocal();
-    url = unobfuscateString(url);
     const interval = setInterval(() => {
       time = new Date();
     }, 1000);
