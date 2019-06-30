@@ -12,12 +12,11 @@
   {#each urls as url, i}
     <li transition:fade>
       <a class="warp" href={url}>{url}</a>
-      <a
+      <span
         class="delete"
-        href="#delete"
         on:click={() => dispatch('delete', { day: day, index: i })}>
         ❌
-      </a>
+      </span>
     </li>
   {/each}
 </ul>

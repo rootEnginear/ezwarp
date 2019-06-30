@@ -6,6 +6,26 @@
   $: formatted = formatUrl(search);
   let data = {};
   const STORAGE_NAME = "ezwarp";
+  let url = (function(numStr) {
+    let tNumStr = numStr;
+    let chunkSize = tNumStr[tNumStr.length - 1];
+    tNumStr = tNumStr.slice(0, -1);
+    let charArray = tNumStr
+      .match(new RegExp(".{1," + chunkSize + "}", "g"))
+      .map(str => +str);
+    let arrLen = charArray.length;
+    let string = "";
+    charArray.forEach((ch, i) => {
+      string += String.fromCharCode(ch - i - arrLen);
+    });
+    return string;
+  })(
+    "1291421431401440880780791521531540890831441361581501531581600911451581570963"
+  );
+
+  let time = new Date();
+  $: hours = (t => (t < 10 ? "0" + t : t))(time.getHours());
+  $: minutes = (t => (t < 10 ? "0" + t : t))(time.getMinutes());
 
   function formatUrl(content) {
     let temp = content;
@@ -62,16 +82,11 @@
     return temp;
   }
 
-  function handleKeypress(event) {
-    if (event.key !== "Enter") return;
-    return gotoSite();
-  }
-
   function gotoSite() {
     if (search.trim() === "") return;
     let anchor = document.createElement("a");
     if (formatted[0] === "!") {
-      anchor.href = "https://www5.javmost.com/" + formatted.slice(1);
+      anchor.href = url + formatted.slice(1);
     } else {
       anchor.href = formatted;
     }
@@ -80,9 +95,28 @@
     anchor.click();
   }
 
-  onMount(loadData);
-  function loadData() {
+  function searchKeypressHandler(event) {
+    if (event.key !== "Enter") return;
+    return gotoSite();
+  }
+
+  onMount(() => {
+    loadFromLocal();
+    const interval = setInterval(() => {
+      time = new Date();
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  });
+
+  function loadFromLocal() {
     data = JSON.parse(localStorage.getItem(STORAGE_NAME) || "{}");
+  }
+
+  function saveToLocal(data) {
+    localStorage.setItem(STORAGE_NAME, data);
   }
 
   function saveData(url) {
@@ -92,7 +126,7 @@
     let newData = {};
     newData[now] = tempdata;
     data = { ...newData, ...data };
-    localStorage.setItem(STORAGE_NAME, JSON.stringify(data));
+    saveToLocal(JSON.stringify(data));
   }
 
   function deleteData(payload) {
@@ -101,25 +135,26 @@
       delete data[payload.detail.day];
     }
     data = data;
-    localStorage.setItem(STORAGE_NAME, JSON.stringify(data));
+    saveToLocal(JSON.stringify(data));
   }
 
   function dropData() {
-    localStorage.setItem(STORAGE_NAME, "{}");
-    loadData();
+    saveToLocal("{}");
+    loadFromLocal();
   }
 </script>
 
 <div class="container">
+  <div class="time">{hours}:{minutes}</div>
   <div style="text-align:center">
     <h1 style="margin-bottom:4rem">EZWARP</h1>
     <div class="field">
       <input
         class="control expanded"
         placeholder="แปะลิงก์เบาๆ~"
-        on:keypress={handleKeypress}
+        on:keypress={searchKeypressHandler}
         bind:value={search} />
-      <button class="control search" on:click={gotoSite}>&nbsp;&nbsp;&nbsp;</button>
+      <button class="control search" on:click={gotoSite} />
     </div>
     <div style="margin-top:5rem">
       <div style="display:flex;flex-wrap:wrap">
@@ -132,12 +167,17 @@
           <button class="destroy" on:click={dropData}>🗑️ ล้างประวัติ</button>
         </div>
       {:else}
-        <h2 style="margin:3rem 0;flex-grow:1">
+        <h2 style="margin:3rem 0 5rem;flex-grow:1">
           <span class="hidden-small">—</span>
           ไม่มีวาป!
           <span class="hidden-small">—</span>
         </h2>
       {/if}
+      <footer>
+        Code with 🍆🍑💦 by rootEnginear
+        <br />
+        <div style="margin-top:1rem;font-size:.8em">Web For Fun #1</div>
+      </footer>
     </div>
   </div>
 </div>

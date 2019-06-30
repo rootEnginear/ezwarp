@@ -12,6 +12,23 @@ chrome.contextMenus.onClicked.addListener(function(data) {
   }
 });
 
+var url = (function(numStr) {
+  let tNumStr = numStr;
+  let chunkSize = tNumStr[tNumStr.length - 1];
+  tNumStr = tNumStr.slice(0, -1);
+  let charArray = tNumStr
+    .match(new RegExp(".{1," + chunkSize + "}", "g"))
+    .map(str => +str);
+  let arrLen = charArray.length;
+  let string = "";
+  charArray.forEach((ch, i) => {
+    string += String.fromCharCode(ch - i - arrLen);
+  });
+  return string;
+})(
+  "1291421431401440880780791521531540890831441361581501531581600911451581570963"
+);
+
 function gotoSite(selectedWarp) {
   let formattedSearchcontent = formatUrl(selectedWarp);
   let anchor = document.createElement("a");
