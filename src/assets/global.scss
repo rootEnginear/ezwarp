@@ -41,16 +41,17 @@ h2 {
 
 .time {
   z-index: -1;
+  width: 100vw;
   user-select: none;
-  transform: translate(-5%, 0);
+  text-align: center;
   position: fixed;
   opacity: 0.1;
-  line-height: 50vw;
-  left: -2vw;
+  line-height: 45vw;
+  left: 0;
   font-weight: 200;
-  font-size: 50vw;
+  font-size: 45vw;
   color: white;
-  bottom: -8.3vw;
+  bottom: -8vw;
 }
 
 .field {
