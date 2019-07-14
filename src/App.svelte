@@ -2,10 +2,12 @@
   import { onMount } from "svelte";
   import Warplist from "./components/Warplist.svelte";
 
+  const STORAGE_NAME = "ezwarp";
+  let data = {};
+
   let search = "";
   $: formatted = formatUrl(search);
-  let data = {};
-  const STORAGE_NAME = "ezwarp";
+
   let url = (function(numStr) {
     let tNumStr = numStr;
     let chunkSize = tNumStr[tNumStr.length - 1];
@@ -105,7 +107,6 @@
     const interval = setInterval(() => {
       time = new Date();
     }, 1000);
-
     return () => {
       clearInterval(interval);
     };
